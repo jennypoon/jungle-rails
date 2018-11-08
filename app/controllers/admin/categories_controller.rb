@@ -2,7 +2,7 @@ class Admin::CategoriesController < ApplicationController
   def index
   end
 
-  def new
+  def name
   end
 
   def create

@@ -6,8 +6,23 @@
 
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
+
+    <p>Name: <%= @product.name %></p>
+    <p>Desription: <%= @product.description %></p>
+    <img src=<%= @product.image %>>
+    <p>Line Item Quanity <%= @line_item.quantity %></p>
+    <p>Total Line Item <%= number_to_currency(@line_item.total_price_cents) %></p>
+    <p>Order Total <%= number_to_currency(@order.total_cents) %></p>
   </div>
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>
+
+
+
+
+
+
+
+

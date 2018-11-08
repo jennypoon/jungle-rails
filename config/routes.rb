@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :users
+  resources :users
   root to: 'products#index'
 
   resources :products, only: [:index, :show]
@@ -16,6 +18,15 @@ Rails.application.routes.draw do
     root to: 'dashboard#show'
     resources :products, except: [:edit, :update, :show]
     resources :categories, only: [:index, :create, :new]
+
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+
+  get 'signup' => 'users#new', as: 'signup'
+  get 'login' => 'sessions#new', as: 'login'
+  get 'logout' => 'sessions#destroy', as: 'logout'
+
+
 
   end
 

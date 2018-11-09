@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
     order  = create_order(charge)
 
     if order.valid?
+      UserMailer.order_receipt_email(@order).deliver_now
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
     else
@@ -55,8 +56,7 @@ class OrdersController < ApplicationController
       )
     end
 
-    if order.save!
-      UserMailer.order_receipt_email(@order).deliver_now
+    order.save!
     order
     end
   end

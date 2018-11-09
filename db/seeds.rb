@@ -139,16 +139,22 @@ user1 = User.create! ({
   first_name: 'Tim',
   last_name: 'Horton',
   email: 'timhorton@coffee.com',
-  password_digest: 'timbits'
+  password_digest: BCrypt::Password.create('timbits')
 })
 
 user2 = User.create! ({
   first_name: 'Moon',
   last_name: 'Dollars',
   email: 'moondollars@coffee.com',
-  password_digest: 'stars'
+  password_digest: BCrypt::Password.create('stars')
 })
 
+user3 = User.create! ({
+  first_name: 'Blenz',
+  last_name: 'Coffee',
+  email: 'blenz@coffee.com',
+  password_digest: BCrypt::Password.create('blenz')
+})
 
 puts "Creating Reviews"
 

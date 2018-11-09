@@ -40,16 +40,13 @@
       <% end %>
 
       <div class="col-sm-8">
+        <% if @review.first %>
         <h4> Reviews </h4>
-        <% @review.each do |comment| %>
+        <% @review.reverse_each do |comment| %>
           <dl class="dl-horizontal">
-            <dt>Name</dt>
-            <dd><%= comment.user.first_name %> <%= comment.user.last_name %></dd>
-            <dt>Ratings</dt>
-            <dd><%= comment.rating %>/5</dd>
-            <dt>Comment</dt>
-            <dd><%= comment.description %></dd>
+            <%= render 'review', comment: comment %>
           </dl>
+        <% end %>
         <% end %>
       </div>
 

@@ -27,29 +27,34 @@
     </div>
 
     <div class="row">
-      <h4> Add a Review </h4>
-      <%= form_for [@product, @product.review.create] do |f| %>
-        <%= f.select :rating, [['Stay Away', 1], ['Poor', 2], ['Mediocre', 3], ['Good', 4], ['Great', 5]] %>
-        <%= f.label :description %>
-        <%= f.text_area :description, size: "80x8" %><br />
-        <%= f.submit %>
+      <% if current_user %>
+      <div class="col-sm-4">
+        <h4> Add a Review </h4>
+          <%= form_for [@product, @product.review.create] do |f| %>
+            <%= f.select :rating, [['Stay Away', 1], ['Poor', 2], ['Mediocre', 3], ['Good', 4], ['Great', 5]] %>
+            <%= f.label :description %>
+            <%= f.text_area :description, size: "50x10" %><br />
+            <%= f.submit %>
+          <% end %>
+      </div>
       <% end %>
-    </div>
 
-    <div class="row">
-      <h4> Reviews </h4>
-       <% @review.each do |comment| %>
+      <div class="col-sm-8">
+        <h4> Reviews </h4>
+        <% @review.each do |comment| %>
+          <dl class="dl-horizontal">
+            <dt>Name</dt>
+            <dd><%= comment.user.first_name %> <%= comment.user.last_name %></dd>
+            <dt>Ratings</dt>
+            <dd><%= comment.rating %>/5</dd>
+            <dt>Comment</dt>
+            <dd><%= comment.description %></dd>
+          </dl>
+        <% end %>
+      </div>
 
-       <dl class="dl-horizontal">
-          <dt>Name</dt>
-          <dd><%= comment.user.first_name %> <%= comment.user.last_name %></dd>
-          <dt>Ratings</dt>
-          <dd><%= comment.rating %>/5</dd>
-          <dt>Comment</dt>
-          <dd><%= comment.description %></dd>
-        </dl>
-      <% end %>
-    </div>
+  </div>
+
   </article>
 
 </section>

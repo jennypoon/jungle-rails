@@ -4,9 +4,14 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Thanks for ordering from Jungle! Your Order Number is: <%= @order_id %></h1>
+    <h1>Thanks for ordering from Jungle! Your Order Number is: <%= @order.id %></h1>
     <p>
       Your order is currently being processed and will arrive with 1-12 months.
+      Here is a list of your items:
+      <% @order.line_items.each do |line_item| %>
+      <h4><%= line_item.product.name %></h4>
+      <% end %>
+      Order Grand Total: <%= number_to_currency((@order.total_cents)/100) %>
     </p>
   </body>
 </html>

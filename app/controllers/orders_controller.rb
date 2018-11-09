@@ -11,7 +11,6 @@ class OrdersController < ApplicationController
     order  = create_order(charge)
 
     if order.valid?
-      UserMailer.order_receipt_email(@order).deliver_now
       empty_cart!
       redirect_to order, notice: 'Your Order has been placed.'
     else
@@ -45,6 +44,8 @@ class OrdersController < ApplicationController
       stripe_charge_id: stripe_charge.id, # returned by stripe
     )
 
+
+
     enhanced_cart.each do |entry|
       product = entry[:product]
       quantity = entry[:quantity]
@@ -57,6 +58,11 @@ class OrdersController < ApplicationController
     end
 
     order.save!
+
+    if order.save!
+      UserMailer.order_receipt_email(order).deliver_now
+    end
+
     order
   end
 

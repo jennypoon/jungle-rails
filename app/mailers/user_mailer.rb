@@ -3,7 +3,9 @@ class UserMailer < ApplicationMailer
 
   def order_receipt_email(order)
     @order = order
-    mail(to: @order_email, subject: @order_id)
+    @line_item = LineItem.find_by(order_id: @order.id)
+
+    mail(to: @order.email, subject: @order.id)
   end
 
 end

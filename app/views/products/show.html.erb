@@ -31,7 +31,7 @@
       <%= form_for [@product, @product.review.create] do |f| %>
         <%= f.select :rating, [['Stay Away', 1], ['Poor', 2], ['Mediocre', 3], ['Good', 4], ['Great', 5]] %>
         <%= f.label :description %>
-        <%= f.text_area :description %><br />
+        <%= f.text_area :description, size: "80x8" %><br />
         <%= f.submit %>
       <% end %>
     </div>

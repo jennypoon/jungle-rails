@@ -59,7 +59,7 @@ cat1.products.create!({
   price: 34.49
 })
 
-cat1.products.create!({
+socks = cat1.products.create!({
   name:  'Hipster Socks',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel4.jpg'),
@@ -67,7 +67,7 @@ cat1.products.create!({
   price: 25.00
 })
 
-cat1.products.create!({
+shoes = cat1.products.create!({
   name:  'Russian Spy Shoes',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel5.jpg'),
@@ -132,5 +132,54 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+
+## REVIEWS
+
+user1 = User.create! ({
+  first_name: 'Tim',
+  last_name: 'Horton',
+  email: 'timhorton@coffee.com',
+  password_digest: 'timbits'
+})
+
+user2 = User.create! ({
+  first_name: 'Moon',
+  last_name: 'Dollars',
+  email: 'moondollars@coffee.com',
+  password_digest: 'stars'
+})
+
+
+puts "Creating Reviews"
+
+Review.destroy_all
+
+Review.create!({
+  product_id:  socks.id,
+  user_id: user1.id,
+  description: 'Hispter Socks! You will never be able to go back',
+  rating: 5,
+})
+
+Review.create!({
+  product_id:  socks.id,
+  user_id: user2.id,
+  description: 'These socks are great!! I bought 100 more to share with my friends and family',
+  rating: 5,
+})
+
+Review.create!({
+  product_id:  shoes.id,
+  user_id: user2.id,
+  description: 'Russian Spy Shoes, the name says it all',
+  rating: 1,
+})
+
+Review.create!({
+  product_id:  shoes.id,
+  user_id: user1.id,
+  description: 'These shoes are... wait for it...LEGENDARY!!!!',
+  rating: 5,
+})
 
 puts "DONE!"

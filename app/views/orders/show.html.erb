@@ -7,7 +7,7 @@
   <div class="order-summary jumbotron">
     <h4>Thank you for your order! Here's a summary:</h4>
 
-    Order Grand Total: <%= number_to_currency(@order.total_cents) %><br>
+    Order Grand Total: <%= number_to_currency((@order.total_cents)/100) %><br>
     Email Associated with order: <%= @order.email %>
 
     <table class="table table-bordered">

@@ -54,8 +54,11 @@ class OrdersController < ApplicationController
         total_price: product.price * quantity
       )
     end
-    order.save!
+
+    if order.save!
+      UserMailer.order_receipt_email(@order).deliver_now
     order
+    end
   end
 
 end

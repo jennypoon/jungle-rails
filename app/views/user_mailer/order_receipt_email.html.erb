@@ -6,7 +6,7 @@
   <body>
     <h1>Thanks for ordering from Jungle! Your Order Number is: <%= @order.id %></h1>
     <p>
-      Your order is currently being processed and will arrive with 1-12 months.
+      Your order is currently being processed and will arrive within 1-12 months.
       Here is a list of your items:
       <% @order.line_items.each do |line_item| %>
       <h4><%= line_item.product.name %></h4>

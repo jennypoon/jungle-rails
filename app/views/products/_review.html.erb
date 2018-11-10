@@ -4,3 +4,8 @@
 <dd><%= comment.rating %>/5</dd>
 <dt>Comment</dt>
 <dd><%= comment.description %></dd>
+<% if @comment.user_id == session.user_id %>
+  <dd><%= link_to 'Destroy', product_review(product, review),
+                          :method => :delete,
+                          :confirm => 'Are you sure?' %></dd>
+<% end %>

@@ -17,6 +17,10 @@ class ReviewsController < ApplicationController
   end
 
   def destroy
+    @product = Product.find(params[:product_id])
+    @review = @product.review.find_by(product_id: @product.id, user_id: session[:user_id])
+    @review.destroy
 
-
+    redirect_to @review.product
+  end
 end

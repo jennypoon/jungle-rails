@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
 
-    let(:category) { Category.new(name: "Food") }
+    let(:category) { Category.create(name: "Food") }
 
     subject { Product.new(
                   name: "MangoYummy",
@@ -32,6 +32,8 @@ RSpec.describe Product, type: :model do
 
     it "is valid with a valid category" do
       subject.category = nil
+      puts category.id
+      puts category.name
       expect(subject).to_not be_valid
     end
 

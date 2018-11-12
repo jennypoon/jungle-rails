@@ -57,8 +57,6 @@
           <dd><%= comment.rating %>/5</dd>
           <dt>Comment</dt>
           <dd><%= comment.description %></dd>
-          <dt><%= comment.user_id %></dt>
-          <dd><%= current_user.id %></dd>
           <% if comment.user_id == session[:user_id] %>
             <dd><%= link_to 'Delete', product_review_url(@product, @review),
                                     :method => :delete,

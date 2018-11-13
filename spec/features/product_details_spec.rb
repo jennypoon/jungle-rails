@@ -15,19 +15,6 @@ RSpec.feature "ProductDetails", type: :feature, js: true do
     end
   end
 
-  scenario "They see the detail page when click on image" do
-    # ACT
-    visit root_path
-
-    first(:css, 'img').click
-
-    # DEBUG
-    save_screenshot 'product-detail.png'
-
-    # VERIFY
-    expect(page).to have_text @category.products.first.name
-  end
-
   scenario "They see the detail page when click on product name" do
     # ACT
     visit root_path
@@ -38,8 +25,15 @@ RSpec.feature "ProductDetails", type: :feature, js: true do
     sleep 2
     save_screenshot 'product-detail.png'
 
+    puts "============"
+    puts "Product Name"
+    puts @category.products.first.name
+    puts "============"
+    puts "scenario 1"
+    puts page.html
+
     # VERIFY
-    expect(page).to have_text @category.products.first.name
+    expect(page).to have_current_path("/products/1")
 
   end
 

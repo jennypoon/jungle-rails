@@ -1,16 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-
-
-
-  subject { User.new(
-                  first_name: "Ash",
-                  last_name: "Ketchum",
-                  email: "ash@pallet.com",
-                  password: "pokemon",
-                  password_confirmation: "pokemon"
-              )}
+  subject {
+    User.new(first_name: "Ash", last_name: "Ketchum", email: "ash@pallet.com", password: 'pokemon', password_confirmation: 'pokemon')
+  }
 
   describe 'Validations' do
 
@@ -37,7 +30,7 @@ RSpec.describe User, type: :model do
     it "is not valid if email already exists" do
       User.create(first_name: "Ash",
                last_name: "Ketchum",
-               email: "ASH@PALLET.COM",
+               email: "ash@pallet.com",
                password: "pokemon",
                password_confirmation: "pokemon"
               )
@@ -47,7 +40,7 @@ RSpec.describe User, type: :model do
     it "is not valid if email is not unique without caplocks" do
       User.create(first_name: "Ash",
                last_name: "Ketchum",
-               email: "ash@pallet.com",
+               email: "ASH@PALLET.COM",
                password: "pokemon",
                password_confirmation: "pokemon"
               )
@@ -67,15 +60,49 @@ RSpec.describe User, type: :model do
       subject.last_name = nil
       expect(subject).to_not be_valid
     end
-
   end
 
+  describe '.authenticate_with_credentials' do
+
+    it 'should match password and email' do
+      user = User.create(first_name: 'Ash', last_name: 'Ketchum',
+        email: 'ash@pallet.com', password: 'pokemon',
+        password_confirmation: 'pokemon')
+
+      session = User.authenticate_with_credentials('ash@pallet.com', 'pokemon')
+      puts session
+      puts user
+
+      expect(session).to eq user
+    end
+
+    it 'should match when there is a space in front of email' do
+      user = User.create(first_name: 'Ash', last_name: 'Ketchum',
+        email: 'ash@pallet.com', password: 'pokemon',
+        password_confirmation: 'pokemon')
+
+      session = User.authenticate_with_credentials(' ash@pallet.com', 'pokemon')
+      expect(session).to eq user
+    end
+
+    it 'should match when there is a space at the end of the email' do
+      user = User.create(first_name: 'Ash', last_name: 'Ketchum',
+        email: 'ash@pallet.com', password: 'pokemon',
+        password_confirmation: 'pokemon')
+
+      session = User.authenticate_with_credentials('ash@pallet.com ', 'pokemon')
+      expect(session).to eq user
+    end
+
+    it 'should match when user types wrong cases' do
+      user = User.create(first_name: 'Ash', last_name: 'Ketchum',
+        email: 'ash@pallet.com', password: 'pokemon',
+        password_confirmation: 'pokemon')
+
+      session = User.authenticate_with_credentials('aSH@pallet.COM ', 'pokemon')
+      expect(session).to eq user
+    end
 
 
-
-
-
-
-
-
+  end
 end
